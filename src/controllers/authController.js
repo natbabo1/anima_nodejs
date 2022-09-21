@@ -1,7 +1,14 @@
 const { json } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 const validator = require('../services/validator');
 const ServerError = require('../utilities/serverError');
+
+const genToken = (payload) =>
+  jwt.sign(payload, process.env.JWT_SECRET_KEY || 'private_key', {
+    expiresIn: process.env.JWT_EXPIRES || '1d'
+  });
 
 exports.register = async (req, res, next) => {
   try {
@@ -21,8 +28,11 @@ exports.register = async (req, res, next) => {
     if (error) {
       throw new ServerError(400, error);
     }
-    const user = await User.create(input);
-    return res.status(200).json({ user });
+    const hashedPassword = await bcrypt.hash(input.password, 10);
+    const newRegist = { ...input, password: hashedPassword };
+    const user = await User.create(newRegist);
+    const token = genToken({ id: user.id });
+    return res.status(201).json({ token });
   } catch (err) {
     next(err);
   }

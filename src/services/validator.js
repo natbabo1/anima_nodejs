@@ -1,13 +1,13 @@
 const Joi = require('joi');
 
 const userSchema = Joi.object({
-  username: Joi.string().token().case('lower').min(6).max(16).required(),
+  username: Joi.string().alphanum().case('lower').min(6).max(16).required(),
   email: Joi.string()
     .lowercase()
     .email({ tlds: { allow: true } })
     .required(),
   password: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9_#$@]{8,18}'))
+    .pattern(new RegExp('^[a-zA-Z0-9_#@$]{8,18}$'))
     .required(),
   confirmPassword: Joi.ref('password'),
   firstName: Joi.string().max(30).required(),
