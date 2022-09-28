@@ -1,4 +1,4 @@
-const { TV, MOVIE } = require('../utilities/constant');
+const { TV, MOVIE } = require('../config/constant');
 
 module.exports = (sequelize, DataTypes) => {
   const Anime = sequelize.define(

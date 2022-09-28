@@ -1,4 +1,4 @@
-const { COMPLETED, REJECTED } = require('../utilities/constant');
+const { COMPLETED, REJECTED } = require('../config/constant');
 
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define(

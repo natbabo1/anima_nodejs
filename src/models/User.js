@@ -47,7 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       birthDate: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
         validate: {
           isAfter: '1900-01-01'
         }
@@ -56,10 +55,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM('MALE', 'FEMALE', 'OTHER'),
         allowNull: false
       },
-      mobileNo: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
+      mobileNo: DataTypes.STRING
     },
     { underscored: true }
   );

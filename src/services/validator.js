@@ -12,9 +12,9 @@ const userSchema = Joi.object({
   confirmPassword: Joi.ref('password'),
   firstName: Joi.string().max(30).required(),
   lastName: Joi.string().max(30).required(),
-  birthDate: Joi.date().greater('1-1-1922').required(),
+  birthDate: Joi.date().greater('1-1-1922'),
   gender: Joi.string().valid('Male', 'Female').required(),
-  mobileNo: Joi.string().pattern(new RegExp('^0[0-9]{9}$')).required()
+  mobileNo: Joi.string().pattern(new RegExp('^0[0-9]{9}$'))
 }).with('password', 'confirmPassword');
 
 exports.register = (input) => userSchema.validate(input, { abortEarly: false });
