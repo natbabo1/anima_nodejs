@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER,
       duration: DataTypes.INTEGER,
       imagePath: DataTypes.STRING,
-      synopsis: DataTypes.STRING(1200),
+      highlightImagePath: DataTypes.STRING,
+      synopsis: DataTypes.STRING(10000),
+      duration: DataTypes.INTEGER,
       totalUserReview: {
         type: DataTypes.INTEGER,
         defaultValue: 0,

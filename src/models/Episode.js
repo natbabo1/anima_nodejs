@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: true
         }
       },
+      duration: DataTypes.INTEGER,
       publishStatus: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
