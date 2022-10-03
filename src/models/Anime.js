@@ -75,15 +75,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'RESTRICT'
     });
 
-    Anime.hasMany(db.GenreList, {
-      foreignKey: {
-        name: 'animeId',
-        allowNull: false
-      },
-      onUpdate: 'RESTRICT',
-      onDelete: 'CASCADE'
-    });
-
     Anime.hasMany(db.Episode, {
       foreignKey: {
         name: 'animeId',
@@ -92,6 +83,8 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'RESTRICT',
       onDelete: 'RESTRICT'
     });
+
+    Anime.belongsToMany(db.Genre, { through: db.GenreList });
   };
 
   return Anime;
