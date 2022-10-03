@@ -21,3 +21,18 @@ exports.getAnimeById = (id) =>
       { model: Genre, attributes: ['genre'], through: { attributes: [] } }
     ]
   });
+
+exports.getAnimesOrdered = (orderBy = 'avgReviewScore', limit = 18) =>
+  Anime.findAll({
+    attributes: { exclude: 'ratingId' },
+    include: [
+      { model: Episode },
+      {
+        model: Rating,
+        attributes: ['id', 'rating']
+      },
+      { model: Genre, attributes: ['genre'], through: { attributes: [] } }
+    ],
+    order: [[orderBy, 'DESC']],
+    limit
+  });

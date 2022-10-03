@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 const noPathMiddleware = require('./middlewares/noPath');
 const errorMiddleware = require('./middlewares/error');
+const authenticate = require('./middlewares/authenticate');
 const authRoute = require('./routes/authRoute');
 const animeRoute = require('./routes/animeRoute');
 
