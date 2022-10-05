@@ -62,6 +62,11 @@ module.exports = {
         genre: 'Shounen',
         created_at: new Date(),
         updated_at: new Date()
+      },
+      {
+        genre: 'Sport',
+        created_at: new Date(),
+        updated_at: new Date()
       }
     ]);
   },

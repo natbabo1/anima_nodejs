@@ -20,6 +20,18 @@ module.exports = {
         min_age: 13,
         created_at: new Date(),
         updated_at: new Date()
+      },
+      {
+        rating: 'PG - Children',
+        min_age: 0,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        rating: 'G - All Ages',
+        min_age: 0,
+        created_at: new Date(),
+        updated_at: new Date()
       }
     ]);
     /**

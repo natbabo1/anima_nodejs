@@ -72,7 +72,111 @@ module.exports = {
         name: 'Pierrot',
         created_at: new Date(),
         updated_at: new Date()
-      }
+      },
+      {
+        name: 'Drive',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '8bit',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'ENGI',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Nexus',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'C2C',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'David Production',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: "Brain's Base",
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Maho Film',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'TROYCA',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Studio A-CAT',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'studio MOTHER',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Pine Jam',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'EMT Squared',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Seven',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'CloverWorks',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Kamikaze Douga',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'CoMix Wave Films',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+
+      { name: 'Studio Ghibli', created_at: new Date(), updated_at: new Date() },
+      {
+        name: 'Khara',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: 'Artland',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      { name: 'Studio Chizu', created_at: new Date(), updated_at: new Date() },
+      {
+        name: 'Gainax',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      { name: 'Studio VOLN', created_at: new Date(), updated_at: new Date() }
     ]);
   },
 
