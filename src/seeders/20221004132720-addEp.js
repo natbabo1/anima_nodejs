@@ -8,7 +8,7 @@ module.exports = {
         number: 1,
         image_path:
           'https://img1.ak.crunchyroll.com/i/spire4-tmb/328f563ae2a81d43520f380e1dbe2ba91556432883_large.jpg',
-        video_path: 'nully',
+        video_path: '/subscriber/videos/005-attackOnTitan/001.mp4',
         duration: 123,
         publish_status: true,
         anime_id: 5,
@@ -20,7 +20,7 @@ module.exports = {
         number: 2,
         image_path:
           'https://img1.ak.crunchyroll.com/i/spire4-tmb/f2e0ee3a1dbb05046ae37490f890e4f21557056448_large.jpg',
-        video_path: 'nully',
+        video_path: '/subscriber/videos/005-attackOnTitan/002.mp4',
         duration: 123,
         publish_status: true,
         anime_id: 5,
@@ -120,6 +120,18 @@ module.exports = {
         duration: 123,
         publish_status: true,
         anime_id: 5,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        title: 'A Quiet Beginning',
+        number: 1,
+        image_path:
+          'https://img1.ak.crunchyroll.com/i/spire1-tmb/12e6c856efd925df298b48a55ee2df121664599706_large.jpg',
+        video_path: '/subscriber/videos/029-My-Hero-Academia-Season-6/001.mp4',
+        duration: 123,
+        publish_status: true,
+        anime_id: 29,
         created_at: new Date(),
         updated_at: new Date()
       }
