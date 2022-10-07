@@ -10,6 +10,7 @@ const errorMiddleware = require('./middlewares/error');
 const authenticate = require('./middlewares/authenticate');
 const authRoute = require('./routes/authRoute');
 const animeRoute = require('./routes/animeRoute');
+const miscRoute = require('./routes/miscRoute');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/subscriber', express.static('forSubscription'));
 
 app.use('/auth', authRoute);
 app.use('/animes', animeRoute);
+app.use('/misc', miscRoute);
 
 app.use(noPathMiddleware);
 app.use(errorMiddleware);
