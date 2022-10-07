@@ -5,31 +5,26 @@ module.exports = {
     return queryInterface.bulkInsert('ratings', [
       {
         rating: 'R - 17+ (violence & profanity)',
-        min_age: 17,
         created_at: new Date(),
         updated_at: new Date()
       },
       {
         rating: 'R+ - Mild Nudity',
-        min_age: 17,
         created_at: new Date(),
         updated_at: new Date()
       },
       {
         rating: 'PG-13 - Teens 13 or older',
-        min_age: 13,
         created_at: new Date(),
         updated_at: new Date()
       },
       {
         rating: 'PG - Children',
-        min_age: 0,
         created_at: new Date(),
         updated_at: new Date()
       },
       {
         rating: 'G - All Ages',
-        min_age: 0,
         created_at: new Date(),
         updated_at: new Date()
       }

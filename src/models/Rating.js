@@ -9,13 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: true
         }
-      },
-      minAge: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
       }
     },
     { underscored: true }
