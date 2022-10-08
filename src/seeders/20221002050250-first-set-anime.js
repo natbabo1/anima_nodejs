@@ -10,7 +10,7 @@ module.exports = {
         year: 2009,
         duration: 1440000,
         image_path: 'https://cdn.myanimelist.net/images/anime/1223/96541l.webp',
-        highlight_image_path: '/images/0001.jpeg',
+        highlight_image_path: 'public/images/0001.jpeg',
         synopsis:
           'After a horrific alchemy experiment goes wrong in the Elric household, brothers Edward and Alphonse are left in a catastrophic new reality. Ignoring the alchemical principle banning human transmutation, the boys attempted to bring their recently deceased mother back to life. Instead, they suffered brutal personal loss: Alphonse\'s body disintegrated while Edward lost a leg and then sacrificed an arm to keep Alphonse\'s soul in the physical realm by binding it to a hulking suit of armor. The brothers are rescued by their neighbor Pinako Rockbell and her granddaughter Winry. Known as a bio-mechanical engineering prodigy, Winry creates prosthetic limbs for Edward by utilizing "automail," a tough, versatile metal used in robots and combat armor. After years of training, the Elric brothers set off on a quest to restore their bodies by locating the Philosopher\'s Stone—a powerful gem that allows an alchemist to defy the traditional laws of Equivalent Exchange. As Edward becomes an infamous alchemist and gains the nickname "Fullmetal," the boys\' journey embroils them in a growing conspiracy that threatens the fate of the world. [Written by MAL Rewrite]',
         total_user_review: 1,
@@ -30,7 +30,7 @@ module.exports = {
         duration: 1440000,
         image_path:
           'https://cdn.myanimelist.net/images/anime/1160/122627l.webp',
-        highlight_image_path: '/images/0002.png',
+        highlight_image_path: 'public/images/0002.png',
         synopsis:
           "The elite members of Shuchiin Academy's student council continue their competitive day-to-day antics. Council president Miyuki Shirogane clashes daily against vice-president Kaguya Shinomiya, each fighting tooth and nail to trick the other into confessing their romantic love. Kaguya struggles within the strict confines of her wealthy, uptight family, rebelling against her cold default demeanor as she warms to Shirogane and the rest of her friends. Meanwhile, council treasurer Yuu Ishigami suffers under the weight of his hopeless crush on Tsubame Koyasu, a popular upperclassman who helps to instill a new confidence in him. Miko Iino, the newest student council member, grows closer to the rule-breaking Ishigami while striving to overcome her own authoritarian moral code. As love further blooms at Shuchiin Academy, the student council officers drag their outsider friends into increasingly comedic conflicts. [Written by MAL Rewrite]",
         total_user_review: 1,
@@ -67,7 +67,7 @@ module.exports = {
         year: 2011,
         duration: 1440000,
         image_path: 'https://cdn.myanimelist.net/images/anime/5/73199l.webp',
-        highlight_image_path: '/images/0003.webp',
+        highlight_image_path: 'public/images/0003.webp',
         synopsis:
           'Eccentric scientist Rintarou Okabe has a never-ending thirst for scientific exploration. Together with his ditzy but well-meaning friend Mayuri Shiina and his roommate Itaru Hashida, Rintarou founds the Future Gadget Laboratory in the hopes of creating technological innovations that baffle the human psyche. Despite claims of grandeur, the only notable "gadget" the trio have created is a microwave that has the mystifying power to turn bananas into green goo. However, when Rintarou decides to attend neuroscientist Kurisu Makise\'s conference on time travel, he experiences a series of strange events that lead him to believe that there is more to the "Phone Microwave" gadget than meets the eye. Apparently able to send text messages into the past using the microwave, Rintarou dabbles further with the "time machine," attracting the ire and attention of the mysterious organization SERN. Due to the novel discovery, Rintarou and his friends find themselves in an ever-present danger. As he works to mitigate the damage his invention has caused to the timeline, he is not only fighting a battle to save his loved ones, but also one against his degrading sanity. [Written by MAL Rewrite]',
         total_user_review: 1,
@@ -88,7 +88,7 @@ module.exports = {
         image_path:
           'https://cdn.myanimelist.net/images/anime/1517/100633l.webp',
 
-        highlight_image_path: '/images/0004.jpeg',
+        highlight_image_path: 'public/images/0004.jpeg',
         synopsis:
           "Seeking to restore humanity's diminishing hope, the Survey Corps embark on a mission to retake Wall Maria, where the battle against the merciless \"Titans\" takes the stage once again. Returning to the tattered Shiganshina District that was once his home, Eren Yeager and the Corps find the town oddly unoccupied by Titans. Even after the outer gate is plugged, they strangely encounter no opposition. The mission progresses smoothly until Armin Arlert, highly suspicious of the enemy's absence, discovers distressing signs of a potential scheme against them. Shingeki no Kyojin Season 3 Part 2 follows Eren as he vows to take back everything that was once his. Alongside him, the Survey Corps strive—through countless sacrifices—to carve a path towards victory and uncover the secrets locked away in the Yeager family's basement. [Written by MAL Rewrite]",
         total_user_review: 1,
@@ -309,7 +309,7 @@ module.exports = {
         duration: 1440000,
         image_path:
           'https://cdn.myanimelist.net/images/anime/1908/120036l.webp',
-        highlight_image_path: '/images/0005.webp',
+        highlight_image_path: 'public/images/0005.webp',
         synopsis:
           "The devastation of the Mugen Train incident still weighs heavily on the members of the Demon Slayer Corps. Despite being given time to recover, life must go on, as the wicked never sleep: a vicious demon is terrorizing the alluring women of the Yoshiwara Entertainment District. The Sound Pillar, Tengen Uzui, and his three wives are on the case. However, when he soon loses contact with his spouses, Tengen fears the worst and enlists the help of Tanjirou Kamado, Zenitsu Agatsuma, and Inosuke Hashibira to infiltrate the district's most prominent houses and locate the depraved Upper Rank demon. [Written by MAL Rewrite]",
         total_user_review: 1,

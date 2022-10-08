@@ -17,4 +17,20 @@ const userSchema = Joi.object({
   mobileNo: Joi.string().pattern(new RegExp('^0[0-9]{9}$'))
 }).with('password', 'confirmPassword');
 
+const animeSchema = Joi.object({
+  type: Joi.string().valid('TV', 'Movie'),
+  title: Joi.string().max(255).required(),
+  season: Joi.string().valid('spring', 'summer', 'fall', 'winter', 'none'),
+  year: Joi.number()
+    .greater(1900)
+    .less(new Date().getFullYear() + 1),
+  ratingId: Joi.number().required(),
+  studioId: Joi.number().required(),
+  duration: Joi.number().required(),
+  publishStatus: Joi.boolean().required(),
+  synopsis: Joi.string().required()
+});
+
 exports.register = (input) => userSchema.validate(input, { abortEarly: false });
+exports.addNewAnime = (anime) =>
+  animeSchema.validate(anime, { abortEarly: false });

@@ -15,7 +15,18 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Genre.associate = (db) => {
-    Genre.belongsToMany(db.Anime, { through: db.GenreList });
+    // Genre.hasMany(db.GenreList, {
+    //   foreignKey: {
+    //     name: 'genreId',
+    //     allowNull: false
+    //   },
+    //   onUpdate: 'RESTRICT',
+    //   onDelete: 'CASCADE'
+    // });
+    Genre.belongsToMany(db.Anime, {
+      through: db.GenreList,
+      foreignKey: 'genreId'
+    });
   };
 
   return Genre;

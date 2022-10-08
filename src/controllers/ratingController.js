@@ -9,7 +9,7 @@ exports.getAllRatings = async (req, res, next) => {
   }
 };
 
-exports.createRatings = async (req, res, next) => {
+exports.createRating = async (req, res, next) => {
   try {
     const rating = await Rating.create({
       rating: req.body.rating

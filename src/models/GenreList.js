@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   //   //   onUpdate: 'RESTRICT',
   //   //   onDelete: 'CASCADE'
   //   // });
-
   //   // GenreList.belongsTo(db.Genre, {
   //   //   foreignKey: {
   //   //     name: 'genreId',
