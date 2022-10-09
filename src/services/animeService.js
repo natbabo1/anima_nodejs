@@ -215,7 +215,17 @@ exports.updateAnime = async (animeInput, files, Genres, animeId) => {
   return animeDidUpdate;
 };
 
-exports.destroyAnime = async (animeId) => {};
+exports.checkAnimeExist = async (animeId) => {
+  const anime = await Anime.findOne({ where: { id: animeId } });
+  if (!anime) {
+    throw new ServerError(400, 'This anime does not exist.');
+  }
+  return anime;
+};
+
+exports.deleteAnime = async (anime) => {
+  await anime.destroy();
+};
 
 exports.searchAnimes = async ({ id, title, season, year }) => {
   const where = {};

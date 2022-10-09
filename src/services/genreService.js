@@ -10,3 +10,7 @@ exports.updateGenreList = async (genres, animeId) => {
   await GenreList.destroy({ where: { animeId } });
   await GenreList.bulkCreate(genreList);
 };
+
+exports.deleteGenreList = async (animeId) => {
+  await GenreList.destroy({ where: { animeId } });
+};

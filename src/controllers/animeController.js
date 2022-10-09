@@ -110,7 +110,17 @@ exports.updateAnime = async (req, res, next) => {
   }
 };
 
-exports.deleteAnime = async (req, res, next) => {};
+exports.deleteAnime = async (req, res, next) => {
+  try {
+    const { animeId } = req.params;
+    const anime = await animeService.checkAnimeExist(animeId);
+    await genreService.deleteGenreList(animeId);
+    await animeService.deleteAnime(anime);
+    res.status(201).json({ message: 'delete anime successfully' });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.searchAnime = async (req, res, next) => {
   try {
