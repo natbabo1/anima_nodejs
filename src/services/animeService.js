@@ -1,5 +1,6 @@
 const fsP = require('fs/promises');
 const fs = require('fs');
+const { Op } = require('sequelize');
 const { Anime, Episode, Rating, Genre } = require('../models');
 const validator = require('../services/validator');
 const ServerError = require('../utilities/serverError');
@@ -130,4 +131,106 @@ exports.addAnime = async (animeInput, files, Genres) => {
     await anime.update({ highlightImagePath: fileHighLightPath });
   }
   return anime;
+};
+
+exports.updateAnime = async (animeInput, files, Genres, animeId) => {
+  const { error } = validator.addNewAnime(animeInput);
+  if (error) {
+    throw new ServerError(400, error);
+  }
+  const animeDidUpdate = await Anime.update(animeInput, {
+    where: { id: animeId }
+  });
+
+  if (!animeDidUpdate) {
+    throw new ServerError(400, 'anime id is not exits');
+  }
+
+  if (!files.coverImage && !files.highlightImage) {
+    return animeDidUpdate;
+  }
+
+  const anime = await Anime.findOne({ where: { id: animeId } });
+
+  if (files.coverImage) {
+    const { imagePath } = anime;
+    let filePath;
+    if (imagePath.startsWith('public')) {
+      const imagePathSplited = imagePath.split('/');
+      const fileName =
+        imagePathSplited[imagePathSplited.length - 1].split('.')[0];
+      const pathName = imagePathSplited
+        .slice(0, imagePathSplited.length - 1)
+        .join('/');
+      filePath = `${pathName}/${fileName}.${
+        files.coverImage[0].mimetype.split('/')[1]
+      }`;
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    } else {
+      const folderName = `public/animes/${anime.id}-${anime.title.slice(
+        0,
+        10
+      )}`;
+      if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+      }
+      filePath = `${folderName}/cover-${files.coverImage[0].filename}`;
+    }
+    fs.copyFileSync(files.coverImage[0].path, filePath);
+    fs.unlinkSync(files.coverImage[0].path);
+    await anime.update({ imagePath: filePath });
+  }
+  if (files.highlightImage) {
+    const { highlightImagePath } = anime;
+    let filePath;
+    if (highlightImagePath && highlightImagePath.startsWith('public')) {
+      const imagePathSplited = highlightImagePath.split('/');
+      const fileName =
+        imagePathSplited[imagePathSplited.length - 1].split('.')[0];
+      const pathName = imagePathSplited
+        .slice(0, imagePathSplited.length - 1)
+        .join('/');
+      filePath = `${pathName}/${fileName}.${
+        files.highlightImage[0].mimetype.split('/')[1]
+      }`;
+      if (fs.existsSync(highlightImagePath)) {
+        fs.unlinkSync(highlightImagePath);
+      }
+    } else {
+      const folderName = `public/animes/${anime.id}-${anime.title.slice(
+        0,
+        10
+      )}`;
+      if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+      }
+      filePath = `${folderName}/highlight-${files.highlightImage[0].filename}`;
+    }
+    fs.copyFileSync(files.highlightImage[0].path, filePath);
+    fs.unlinkSync(files.highlightImage[0].path);
+    await anime.update({ highlightImagePath: filePath });
+  }
+  return animeDidUpdate;
+};
+
+exports.destroyAnime = async (animeId) => {};
+
+exports.searchAnimes = async ({ id, title, season, year }) => {
+  const where = {};
+  if (id) {
+    where.id = +id;
+  }
+  if (title) {
+    where.title = { [Op.like]: `%${title}%` };
+  }
+  if (season) {
+    where.season = season;
+  }
+  if (year) {
+    where.year = +year;
+  }
+  const animes = await Anime.findAll({ where, include: Genre });
+  return animes;
 };

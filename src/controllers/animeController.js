@@ -71,3 +71,53 @@ exports.createAnime = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateAnime = async (req, res, next) => {
+  try {
+    const {
+      Genres,
+      title,
+      type,
+      season,
+      year,
+      duration,
+      synopsis,
+      publishStatus,
+      ratingId,
+      studioId
+    } = req.body;
+    const { animeId } = req.params;
+    const didUpdate = await animeService.updateAnime(
+      {
+        title,
+        type,
+        season: season !== 'null' ? season : 'none',
+        year: +year,
+        duration: +duration,
+        synopsis,
+        publishStatus: publishStatus === 'true' ? true : false,
+        studioId: +studioId,
+        ratingId: +ratingId
+      },
+      req.files,
+      Genres,
+      animeId
+    );
+    await genreService.updateGenreList(JSON.parse(Genres), animeId);
+    return res.status(200).json({ didUpdate });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteAnime = async (req, res, next) => {};
+
+exports.searchAnime = async (req, res, next) => {
+  try {
+    const { id, title, season, year } = req.query;
+    const animes = await animeService.searchAnimes({ id, title, season, year });
+    return res.status(200).json({ animes });
+  } catch (err) {
+    next(err);
+  }
+};

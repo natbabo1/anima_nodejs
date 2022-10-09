@@ -5,13 +5,27 @@ const episodeController = require('../controllers/episodeController');
 
 const router = express.Router();
 
-router.route('/').post(
-  upload.fields([
-    { name: 'coverImage', maxCount: 1 },
-    { name: 'highlightImage', maxCount: 1 }
-  ]),
-  animeController.createAnime
-);
+router
+  .route('/')
+  .get(animeController.searchAnime)
+  .post(
+    upload.fields([
+      { name: 'coverImage', maxCount: 1 },
+      { name: 'highlightImage', maxCount: 1 }
+    ]),
+    animeController.createAnime
+  );
+
+router
+  .route('/:animeId')
+  .put(
+    upload.fields([
+      { name: 'coverImage', maxCount: 1 },
+      { name: 'highlightImage', maxCount: 1 }
+    ]),
+    animeController.updateAnime
+  )
+  .delete(animeController.deleteAnime);
 
 router.get('/highlight', animeController.getHighlighAnime);
 router.get('/popular', animeController.getPopularAnimes);
