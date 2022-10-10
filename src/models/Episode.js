@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       imagePath: DataTypes.STRING,
       videoPath: {
         type: DataTypes.STRING,
-        allowNull: false,
         validate: {
           notEmpty: true
         }

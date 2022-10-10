@@ -1,9 +1,6 @@
 module.exports = (err, req, res, next) => {
   const { code, message } = err;
-  if (
-    err.name === 'SequelizeUniqueConstraintError' ||
-    err.name === 'SequelizeValidationError'
-  ) {
+  if (err.name.startsWith('Sequelize')) {
     return res.status(400).json({ message: err.errors[0].message });
   }
   if (err.name === 'JsonWebTokenError') {

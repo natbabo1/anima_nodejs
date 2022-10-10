@@ -8,8 +8,10 @@ const morgan = require('morgan');
 const noPathMiddleware = require('./middlewares/noPath');
 const errorMiddleware = require('./middlewares/error');
 const authenticate = require('./middlewares/authenticate');
+const adminAuthenticate = require('./middlewares/adminAuthenicate');
 const authRoute = require('./routes/authRoute');
 const animeRoute = require('./routes/animeRoute');
+const manageRoute = require('./routes/manageRoute');
 const miscRoute = require('./routes/miscRoute');
 
 const app = express();
@@ -20,10 +22,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/public', express.static('public'));
-app.use('/subscriber', express.static('forSubscription'));
+app.use('/forSubscription', express.static('forSubscription'));
 
 app.use('/auth', authRoute);
 app.use('/animes', animeRoute);
+app.use('/manage', adminAuthenticate, manageRoute);
 app.use('/misc', miscRoute);
 
 app.use(noPathMiddleware);

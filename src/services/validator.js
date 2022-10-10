@@ -31,6 +31,14 @@ const animeSchema = Joi.object({
   synopsis: Joi.string().required()
 });
 
+const episodeSchema = Joi.object({
+  number: Joi.number().required(),
+  title: Joi.string().max(255).required(),
+  publishStatus: Joi.boolean().required()
+});
+
 exports.register = (input) => userSchema.validate(input, { abortEarly: false });
 exports.addNewAnime = (anime) =>
   animeSchema.validate(anime, { abortEarly: false });
+exports.createEpisode = (episode) =>
+  episodeSchema.validate(episode, { abortEarly: false });

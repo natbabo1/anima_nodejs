@@ -1,4 +1,3 @@
-const fsP = require('fs/promises');
 const fs = require('fs');
 const { Op } = require('sequelize');
 const { Anime, Episode, Rating, Genre } = require('../models');
@@ -12,6 +11,8 @@ exports.getHighlightAnimes = () =>
     order: [['avgReviewScore', 'DESC']],
     limit: 5
   });
+
+exports.getAnimeByIdMin = (id) => Anime.findOne({ where: { id } });
 
 exports.getAnimeById = (id) =>
   Anime.findOne({
