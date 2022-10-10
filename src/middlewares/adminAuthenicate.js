@@ -21,14 +21,7 @@ module.exports = async (req, res, next) => {
 
     const user = await User.findOne({
       attributes: { exclude: 'password' },
-      where: { id: payload.id },
-      include: [
-        {
-          model: Subscription,
-          attributes: ['endDate'],
-          include: { model: Tier, attributes: ['id', 'name'] }
-        }
-      ]
+      where: { id: payload.id }
     });
 
     if (!user) {

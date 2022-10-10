@@ -33,5 +33,28 @@ exports.createEpisode = async (req, res, next) => {
   }
 };
 
-exports.updateEpisode = async (req, res, next) => {};
-exports.deleteEpisode = async (req, res, next) => {};
+exports.updateEpisode = async (req, res, next) => {
+  const { animeId, episodeId } = req.params;
+  const { number, title, publishStatus } = req.body;
+  const episode = await episodeService.updateEpisode(
+    {
+      number: +number,
+      title,
+      publishStatus: publishStatus === 'false' ? false : true
+    },
+    req.files,
+    animeId,
+    episodeId
+  );
+  res.status(200).json({ episode });
+};
+
+exports.deleteEpisode = async (req, res, next) => {
+  try {
+    const { animeId, episodeId } = req.params;
+    await episodeService.deleteEpisode(animeId, episodeId);
+    res.status(200).json({ message: 'delete Episode success' });
+  } catch (err) {
+    next(err);
+  }
+};

@@ -225,7 +225,12 @@ exports.checkAnimeExist = async (animeId) => {
 };
 
 exports.deleteAnime = async (anime) => {
+  const pathSplited = anime.imagePath.split('/');
+  const path = pathSplited.slice(0, pathSplited.length - 1).join('/');
   await anime.destroy();
+  if (fs.existsSync(path)) {
+    fs.rmSync(path, { recursive: true, force: true });
+  }
 };
 
 exports.searchAnimes = async ({ id, title, season, year }) => {

@@ -33,8 +33,14 @@ router.route('/:animeId/ep').post(
 );
 
 router
-  .route('/:animeId/ep/:epId')
-  .put(episodeController.updateEpisode)
+  .route('/:animeId/ep/:episodeId')
+  .put(
+    upload.fields([
+      { name: 'imagePath', maxCount: 1 },
+      { name: 'videoPath', maxCount: 1 }
+    ]),
+    episodeController.updateEpisode
+  )
   .delete(episodeController.deleteEpisode);
 
 module.exports = router;
