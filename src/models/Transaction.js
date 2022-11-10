@@ -1,14 +1,14 @@
-const { COMPLETED, REJECTED } = require('../config/constant');
+const { COMPLETED, REJECTED } = require("../config/constant");
 
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define(
-    'Transaction',
+    "Transaction",
     {
       amount: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false
       },
-      slip_url: {
+      proofId: {
         type: DataTypes.STRING,
         allowNull: false
       }
@@ -19,20 +19,20 @@ module.exports = (sequelize, DataTypes) => {
   Transaction.associate = (db) => {
     Transaction.belongsTo(db.User, {
       foreignKey: {
-        name: 'userId',
+        name: "userId",
         allowNull: false
       },
-      onUpdate: 'RESTRICT',
-      onDelete: 'NO ACTION'
+      onUpdate: "RESTRICT",
+      onDelete: "NO ACTION"
     });
 
     Transaction.hasOne(db.Subscription, {
       foreignKey: {
-        name: 'transactionId',
+        name: "transactionId",
         allowNull: false
       },
-      onUpdate: 'RESTRICT',
-      onDelete: 'RESTRICT'
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT"
     });
   };
 

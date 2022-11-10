@@ -1,14 +1,14 @@
-const fs = require('fs');
-const { Op } = require('sequelize');
-const { Anime, Episode, Rating, Genre } = require('../models');
-const validator = require('../services/validator');
-const ServerError = require('../utilities/serverError');
+const fs = require("fs");
+const { Op } = require("sequelize");
+const { Anime, Episode, Rating, Genre } = require("../models");
+const validator = require("../services/validator");
+const ServerError = require("../utilities/serverError");
 
 exports.getHighlightAnimes = () =>
   Anime.findAll({
-    attributes: ['id'],
+    attributes: ["id"],
     where: { publishStatus: true },
-    order: [['avgReviewScore', 'DESC']],
+    order: [["avgReviewScore", "DESC"]],
     limit: 5
   });
 
@@ -16,30 +16,31 @@ exports.getAnimeByIdMin = (id) => Anime.findOne({ where: { id } });
 
 exports.getAnimeById = (id) =>
   Anime.findOne({
-    attributes: { exclude: 'ratingId' },
+    attributes: { exclude: "ratingId" },
     where: { id },
     include: [
       { model: Episode },
       {
         model: Rating,
-        attributes: ['id', 'rating']
+        attributes: ["id", "rating"]
       },
-      { model: Genre, attributes: ['genre'], through: { attributes: [] } }
+      { model: Genre, attributes: ["genre"], through: { attributes: [] } }
     ]
   });
 
-exports.getAnimesOrdered = (orderBy = 'avgReviewScore', limit = 18) =>
+exports.getAnimesOrdered = (orderBy = "avgReviewScore", limit = 18) =>
   Anime.findAll({
-    attributes: { exclude: 'ratingId' },
+    where: { publishStatus: true },
+    attributes: { exclude: "ratingId" },
     include: [
-      { model: Episode },
+      { model: Episode, where: { publishStatus: true } },
       {
         model: Rating,
-        attributes: ['id', 'rating']
+        attributes: ["id", "rating"]
       },
-      { model: Genre, attributes: ['genre'], through: { attributes: [] } }
+      { model: Genre, attributes: ["genre"], through: { attributes: [] } }
     ],
-    order: [[orderBy, 'DESC']],
+    order: [[orderBy, "DESC"]],
     limit
   });
 
@@ -52,37 +53,39 @@ const getSeasonNow = () => {
       case 0:
       case 1:
       case 2:
-        return 'winter';
+        return "winter";
       case 3:
       case 4:
       case 5:
-        return 'spring';
+        return "spring";
       case 6:
       case 7:
       case 8:
-        return 'summer';
+        return "summer";
       case 9:
       case 10:
       case 11:
-        return 'fall';
+        return "fall";
     }
   })();
 
   return { season, year };
 };
 
+exports.getSeasonNow = getSeasonNow;
+
 exports.getThisSeasonAnimes = async (limit = 24) => {
   const { season, year } = getSeasonNow();
   const animes = await Anime.findAll({
-    attributes: { exclude: 'ratingId' },
-    where: { season, year },
+    attributes: { exclude: "ratingId" },
+    where: { season, year, publishStatus: true },
     include: [
       { model: Episode },
       {
         model: Rating,
-        attributes: ['id', 'rating']
+        attributes: ["id", "rating"]
       },
-      { model: Genre, attributes: ['genre'], through: { attributes: [] } }
+      { model: Genre, attributes: ["genre"], through: { attributes: [] } }
     ],
     limit
   });
@@ -91,25 +94,25 @@ exports.getThisSeasonAnimes = async (limit = 24) => {
 
 exports.getMovies = (limit = 18) =>
   Anime.findAll({
-    attributes: { exclude: 'ratingId' },
-    where: { type: 'Movie' },
+    attributes: { exclude: "ratingId" },
+    where: { type: "Movie", publishStatus: true },
     include: [
       { model: Episode },
       {
         model: Rating,
-        attributes: ['id', 'rating']
+        attributes: ["id", "rating"]
       },
-      { model: Genre, attributes: ['genre'], through: { attributes: [] } }
+      { model: Genre, attributes: ["genre"], through: { attributes: [] } }
     ],
     limit
   });
 
 exports.addAnime = async (animeInput, files, Genres) => {
   if (!files.coverImage[0]) {
-    throw new ServerError(400, 'Image Cover is required.');
+    throw new ServerError(400, "Image Cover is required.");
   }
   if (Genres.length === 0) {
-    throw new ServerError(400, 'Anime must have at least one genre.');
+    throw new ServerError(400, "Anime must have at least one genre.");
   }
   const { error } = validator.addNewAnime(animeInput);
   if (error) {
@@ -144,7 +147,7 @@ exports.updateAnime = async (animeInput, files, Genres, animeId) => {
   });
 
   if (!animeDidUpdate) {
-    throw new ServerError(400, 'anime id is not exits');
+    throw new ServerError(400, "anime id is not exits");
   }
 
   if (!files.coverImage && !files.highlightImage) {
@@ -156,15 +159,15 @@ exports.updateAnime = async (animeInput, files, Genres, animeId) => {
   if (files.coverImage) {
     const { imagePath } = anime;
     let filePath;
-    if (imagePath.startsWith('public')) {
-      const imagePathSplited = imagePath.split('/');
+    if (imagePath.startsWith("public")) {
+      const imagePathSplited = imagePath.split("/");
       const fileName =
-        imagePathSplited[imagePathSplited.length - 1].split('.')[0];
+        imagePathSplited[imagePathSplited.length - 1].split(".")[0];
       const pathName = imagePathSplited
         .slice(0, imagePathSplited.length - 1)
-        .join('/');
+        .join("/");
       filePath = `${pathName}/${fileName}.${
-        files.coverImage[0].mimetype.split('/')[1]
+        files.coverImage[0].mimetype.split("/")[1]
       }`;
       if (fs.existsSync(imagePath)) {
         fs.unlinkSync(imagePath);
@@ -186,15 +189,15 @@ exports.updateAnime = async (animeInput, files, Genres, animeId) => {
   if (files.highlightImage) {
     const { highlightImagePath } = anime;
     let filePath;
-    if (highlightImagePath && highlightImagePath.startsWith('public')) {
-      const imagePathSplited = highlightImagePath.split('/');
+    if (highlightImagePath && highlightImagePath.startsWith("public")) {
+      const imagePathSplited = highlightImagePath.split("/");
       const fileName =
-        imagePathSplited[imagePathSplited.length - 1].split('.')[0];
+        imagePathSplited[imagePathSplited.length - 1].split(".")[0];
       const pathName = imagePathSplited
         .slice(0, imagePathSplited.length - 1)
-        .join('/');
+        .join("/");
       filePath = `${pathName}/${fileName}.${
-        files.highlightImage[0].mimetype.split('/')[1]
+        files.highlightImage[0].mimetype.split("/")[1]
       }`;
       if (fs.existsSync(highlightImagePath)) {
         fs.unlinkSync(highlightImagePath);
@@ -219,14 +222,14 @@ exports.updateAnime = async (animeInput, files, Genres, animeId) => {
 exports.checkAnimeExist = async (animeId) => {
   const anime = await Anime.findOne({ where: { id: animeId } });
   if (!anime) {
-    throw new ServerError(400, 'This anime does not exist.');
+    throw new ServerError(400, "This anime does not exist.");
   }
   return anime;
 };
 
 exports.deleteAnime = async (anime) => {
-  const pathSplited = anime.imagePath.split('/');
-  const path = pathSplited.slice(0, pathSplited.length - 1).join('/');
+  const pathSplited = anime.imagePath.split("/");
+  const path = pathSplited.slice(0, pathSplited.length - 1).join("/");
   await anime.destroy();
   if (fs.existsSync(path)) {
     fs.rmSync(path, { recursive: true, force: true });
@@ -239,7 +242,11 @@ exports.searchAnimes = async ({ id, title, season, year }) => {
     where.id = +id;
   }
   if (title) {
-    where.title = { [Op.like]: `%${title}%` };
+    const titleList = title
+      .trim()
+      .split(/\s+/)
+      .map((item) => ({ [Op.substring]: item }));
+    where.title = { [Op.or]: titleList };
   }
   if (season) {
     where.season = season;
